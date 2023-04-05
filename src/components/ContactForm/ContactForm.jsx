@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
+import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
-import css from './ContactForm.module.css';
-
-const useInput = (initialValue) => {
-  const [value, setValue] = useState(initialValue);
-  const handleChange = (e) => setValue(e.target.value);
-  return [value, handleChange];
-};
 
 export const ContactForm = () => {
-  const [name, handleChangeName] = useInput('');
-  const [number, handleChangeNumber] = useInput('');
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const items = useSelector(getContacts);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const isContactExists = contacts.some((contact) => contact.name === name);
-    if (isContactExists) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
-    dispatch(addContact({ name, phone: number }));
-    reset();
+  const handleChangeName = e => {
+    const { value } = e.target;
+    setName(value);
   };
 
-  const reset = () => {
-    handleChangeName('');
-    handleChangeNumber('');
+  const handleChangeNumber = e => {
+    const { value } = e.target;
+    setNumber(value);
+  };
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+      const contactsLists = [...items];
+    if (contactsLists.findIndex(contact => name === contact.name) !== -1) {
+      alert(`${name} is already in contacts.`);
+    } else {
+      dispatch(addContact({ name: name, phone: number }));
+    }
+
+    form.reset();
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
+    <form className={css.form} onSubmit={handleFormSubmit}>
       <label className={css.formLabel}>Name </label>
       <input
         className={css.formName}

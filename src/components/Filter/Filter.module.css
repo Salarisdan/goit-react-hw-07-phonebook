@@ -3,7 +3,7 @@
   flex-direction: column;
   margin: 0.5rem auto 1rem;
   align-items: center;
-  font-size: 1.2rem; 
+  font-size: large;
   text-align: left;
-  padding: 0.5rem 1rem; 
-  }
+  padding: 0.5rem 15rem 0.5rem 1rem;
+}
