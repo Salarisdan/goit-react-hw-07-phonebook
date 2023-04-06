@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: column;
   margin: 0.5rem auto 1rem;
-  align-items: center;
-  font-size: large;
+  align-items: flex-start;
+  font-size: 1.4rem;
+  font-weight: 600;
   text-align: left;
-  padding: 0.5rem 15rem 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #f4f4f4;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
